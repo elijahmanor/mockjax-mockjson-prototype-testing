@@ -1,1 +1,178 @@
-<html></html>
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+  <title>$.mockjax and mockJSON</title>
+  <meta name="description" content="jQuery Conference: San Francisco 2011" />
+  <meta name="author" content="Elijah Manor" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/themes/base/jquery-ui.css" />
+  <link rel="stylesheet" href="css/grid.css" />
+
+  <script src="js/libs/modernizr-1.7.min.js"></script>
+</head>
+
+<body>
+
+	<div id="container">
+		<header></header>
+
+		<div id="main" role="main">
+			<table id="developers">
+				<thead>
+					<tr>
+						<th data-field="firstName">First Name</th>
+						<th data-field="middleName">Middle Name</th>
+						<th data-field="lastName">Last Name</th>
+						<th data-field="city">City</th>
+						<th data-field="country">Country</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+
+			<div id="developer" style="display: none;"></div>
+			
+			<div id="developer-form" style="display: none;"></div>
+		</div>
+
+		<footer></footer>
+	</div>
+
+	<script src="js/libs/jquery-1.5.1.js"></script>
+
+	<script src="js/libs/jquery.tmpl.js"></script>
+	<script src="js/libs/jquery.ui.core.js"></script>
+	<script src="js/libs/jquery.ui.widget.js"></script>
+	<script src="js/libs/dataitem.js"></script>
+	<script src="js/libs/datasource.js"></script>
+	<script src="js/libs/datastore.js"></script>
+	<script src="js/libs/grid.js"></script>
+	
+	<!-- #1: Use local JSON file -->
+	
+	<!-- #2: Mockjax 
+	<script src="js/libs/jquery.mockjax.js"></script>
+	<script src="js/mylibs/datasource-mockjax.js"></script>
+	-->
+
+	<!-- #3: Mockjax & mockJSON 
+	<script src="js/libs/jquery.mockjax.js"></script>
+	<script src="js/libs/jquery.mockjson.js"></script>
+	<script src="js/mylibs/jquery.mockjson.extensions.js"></script>
+	<script src="js/mylibs/datasource-mockjson.js"></script>
+	-->
+
+	<!-- #4: Amplify Mock (Update contact-manager.js) 
+	/* Uses Mockjax */
+	$.getJSON( "/cgi-bin/datasource-remote.cgi", 
+		{ firstname: "j*", lastname: "Query" }, 
+		function( data ) { 
+			response( data.contacts );
+		}
+	);
+	<script src="js/libs/amplify.min.js"></script>
+	<script src="js/mylibs/datasource-request.js"></script>
+	<script src="js/mylibs/datasource-request-mock.js"></script>
+	-->
+
+	<!-- #5: Instead of returning static JSON you could use mockJSON here -->
+
+	<!-- #6: Amplify Whitepages with YQL 
+	/* Uses Amplify Request */
+	amplify.request( "contacts", 
+		{ firstname: "j*", lastname: "Query" }, 
+		function( data ) {
+			response( data.contacts );
+		}
+	);
+	<script src="js/libs/amplify.min.js"></script>
+	<script src="js/mylibs/datasource-request.js"></script>
+	<script src="js/mylibs/datasource-request-whitepages.js"></script>
+	-->
+
+	<!-- #7: Amplify Whitepages with reusable YQL (update datasource-request-whitepages.js)
+	/* Uses Amplify Request */
+	amplify.request( "contacts", 
+		{ firstname: "j*", lastname: "Query", city: "Fort Lauderdale" }, 
+		function( data ) {
+			response( data.contacts );
+		}
+	);	
+	<script src="js/libs/amplify.min.js"></script>
+	<script src="js/mylibs/datasource-request.js"></script>
+	<script src="js/mylibs/datasource-request-whitepages-type.js"></script>
+	<script src="js/mylibs/datasource-request-whitepages-decoder.js"></script>
+	<script src="js/mylibs/datasource-request-whitepages.js"></script>
+	-->
+
+	<!-- scripts concatenated and minified via ant build script-->
+	<script src="js/plugins.js"></script>
+	<script src="js/mylibs/contact-manager.js"></script>
+	<script src="js/script.js"></script>
+	<!-- end scripts-->
+
+	<script type="text/x-jquery-tmpl" id="row-tmpl">
+	<tr>
+		<td>${firstName}</td>
+		<td>${middleName}</td>
+		<td>${lastName}</td>
+		<td>${city}</td>
+		<td>${country}</td>
+	</tr>
+	</script>
+
+	<script type="text/x-jquery-tmpl" id="developer-tmpl">
+	<div>
+		<h2 class="full-name">${firstName} ${middleName} ${lastName}</h2>
+		<p class="address">${city}, ${state}</p>
+		<p class="country">${country}</p>
+	</div>
+	</script>
+
+	<script type="text/x-jquery-tmpl" id="developer-form-tmpl">
+	<form>
+		<legend><h2>Edit this developer</h2></legend>
+		<div>
+			<label>First Name: </label>
+			<input name="firstName" value="${firstName}">
+		</div>
+		<div>
+			<label>Middle Name: </label>
+			<input name="middleName" value="${middleName}" />
+		</div>
+		<div>
+			<label>Last Name: </label>
+			<input name="lastName" value="${lastName}">
+		</div>
+		<div>
+			<label>Street: </label>
+			<input name="street" value="${street}">
+		</div>
+		<div>
+			<label>City: </label>
+			<input name="city" value="${city}"> 
+		</div>
+		<div>
+			<label>State: </label>
+			<input name="state" value="${state}">
+		</div>
+  		<div>
+			<label>Zip: </label>
+			<input name="zip" value="${zip}">
+		</div>
+		<div>
+			<label>Country: </label>
+			<input name="country" value="${country}">
+		</div>
+
+		<input type="submit">
+	</form>
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>QUnit Tests</title>
+
+	<script src="../js/libs/jquery-1.5.1.js"></script>
+
+	<script src="../js/libs/jquery.tmpl.js"></script>
+	<script src="../js/libs/jquery.ui.core.js"></script>
+	<script src="../js/libs/jquery.ui.widget.js"></script>
+	<script src="../js/libs/dataitem.js"></script>
+	<script src="../js/libs/datasource.js"></script>
+	<script src="../js/libs/datastore.js"></script>
+	<script src="../js/libs/grid.js"></script>
+	<script src="../js/libs/jquery.mockjax.js"></script>
+	<script src="./qunit/qunit.js"></script>
+	<script src="./qunit/pavlov.js"></script>
+	<script src="../js/mylibs/contact-manager.js"></script>
+	<script src="./tests.js"></script>
+
+	<link rel="stylesheet" href="qunit/qunit.css" media="screen" />
+</head>
+<body class="flora">
+	<h1 id="qunit-header">QUnit Test Suite</h1>
+	<h2 id="qunit-banner"></h2>
+	<div id="qunit-testrunner-toolbar"></div>
+	<h2 id="qunit-userAgent"></h2>
+	<ol id="qunit-tests"></ol>
+	<div id="qunit-fixture">
+		<table id="developers">
+			<thead>
+				<tr>
+					<th data-field="firstName">First Name</th>
+					<th data-field="middleName">Middle Name</th>
+					<th data-field="lastName">Last Name</th>
+					<th data-field="city">City</th>
+					<th data-field="country">Country</th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>
+
+		<div id="developer"></div>
+
+		<div id="developer-form"></div>
+
+		<script type="text/x-jquery-tmpl" id="row-tmpl">
+		<tr>
+			<td>${firstName}</td>
+			<td>${middleName}</td>
+			<td>${lastName}</td>
+			<td>${city}</td>
+			<td>${country}</td>
+		</tr>
+		</script>
+
+		<script type="text/x-jquery-tmpl" id="developer-tmpl">
+		<div>
+			<h2 class="full-name">${firstName} ${middleName} ${lastName}</h2>
+			<p class="address">${city}, ${state}</p>
+			<p class="country">${country}</p>
+		</div>
+		</script>
+
+	   <script type="text/x-jquery-tmpl" id="developer-form-tmpl">
+		<form>
+			<legend><h2>Edit this developer</h2></legend>
+			<div>
+				<label>First Name: </label>
+				<input name="firstName" value="${firstName}">
+			</div>
+			<div>
+				<label>Middle Name: </label>
+				<input name="middleName" value="${middleName}" />
+			</div>
+			<div>
+				<label>Last Name: </label>
+				<input name="lastName" value="${lastName}">
+			</div>
+			<div>
+				<label>Street: </label>
+				<input name="street" value="${street}">
+			</div>
+			<div>
+				<label>City: </label>
+				<input name="city" value="${city}"> 
+			</div>
+			<div>
+				<label>State: </label>
+				<input name="state" value="${state}">
+			</div>
+			<div>
+				<label>Zip: </label>
+				<input name="zip" value="${zip}">
+			</div>
+			<div>
+				<label>Country: </label>
+				<input name="country" value="${country}">
+			</div>
+
+			<input type="submit">
+		</form>
+		</script>
+	</div>
+
+</body>
+</html>
